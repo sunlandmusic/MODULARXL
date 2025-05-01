@@ -1,7 +1,7 @@
 # SETTINGS_PIANO_XL Module Documentation
 
 ## Overview
-The SETTINGS_PIANO_XL module manages the configuration interface for the PianoXL component, handling key/mode selection, octave settings, and inversion controls.
+The SETTINGS_PIANO_XL module manages the configuration interface for the PianoXL component, providing comprehensive control over instrument, chord, and visual settings.
 
 ## Component Specification
 
@@ -14,39 +14,81 @@ The SETTINGS_PIANO_XL module manages the configuration interface for the PianoXL
 - Visual feedback for current selections
 - Responsive layout
 
-### Controls
+### Controls (8 Features)
 1. **Key Selection**
    - All musical keys available (C, C#, D, etc.)
    - Clear current key display
-   - Easy key switching interface
 
 2. **Mode Selection**
    - Mode options (Major, Minor, etc.)
    - Current mode display
-   - Mode switching interface
 
 3. **Octave Control**
    - Numerical octave selection
    - Increment/decrement controls
-   - Valid range indicators
 
 4. **Inversion Control**
-   - Inversion number selection
-   - Visual representation of current inversion
+   - Inversion number selection (0-2)
    - Reset to root position option
+
+5. **Instrument Selection**
+   - Dropdown window with instrument list
+   - Current instrument display
+   - Preview sound option
+
+6. **Save Chord Button**
+   - Save current chord configuration
+   - Visual feedback on save
+   - Access to saved chords
+
+7. **Skin Button**
+   - Toggle between visual themes
+   - Preview theme changes
+   - Custom theme options
+
+8. **Plus/Minus Bar Integration**
+   - Value adjustment interface
+   - Contextual control based on selected feature
 
 ### Props Interface
 ```typescript
 interface SettingsPianoXLProps {
+    // Core Music Settings
     onKeyChange: (key: string) => void;
     onModeChange: (mode: string) => void;
     onOctaveChange: (octave: number) => void;
     onInversionChange: (inversion: number) => void;
-    currentChord: string;  // Received from PianoXL
+    
+    // Instrument Settings
+    onInstrumentChange: (instrument: string) => void;
+    currentInstrument: string;
+    
+    // Chord Management
+    onChordSave: (chordData: ChordData) => void;
+    currentChord: string;
+    
+    // Visual Settings
+    onSkinChange: (skin: string) => void;
+    currentSkin: string;
+    
+    // Current States
     currentKey: string;
     currentMode: string;
     currentOctave: number;
     currentInversion: number;
+    
+    // Plus/Minus Bar Control
+    onValueChange: (feature: string, value: number) => void;
+    selectedFeature: string;
+}
+
+interface ChordData {
+    name: string;
+    key: string;
+    mode: string;
+    octave: number;
+    inversion: number;
+    instrument: string;
 }
 ```
 
